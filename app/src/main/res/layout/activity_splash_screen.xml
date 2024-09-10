@@ -5,13 +5,4 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="160dp"
-        android:layout_height="166dp"
-        app:srcCompat="@drawable/Gif"
-        tools:layout_editor_absoluteX="125dp"
-        tools:layout_editor_absoluteY="282dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    tools:context=".SplashScreen"/>
