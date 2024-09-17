@@ -1,14 +1,20 @@
 package com.example.techmovee;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.bumptech.glide.Glide;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -23,7 +29,15 @@ public class SplashScreen extends AppCompatActivity {
             return insets;
         });
 
-        //SplashScreen
+        ImageView imageView = findViewById(R.id.imageView);
+
+        // Carrega o GIF do diretório raw
+//        Glide.with(this)
+//                .asGif()
+//                .load(R.raw.gif)  // substitua 'nome_do_gif' pelo nome do arquivo .gif
+//                .into(imageView);
+
+//        //SplashScreen
         Handler handle = new Handler();
         handle.postDelayed(new Runnable() {
             @Override
