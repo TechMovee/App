@@ -9,7 +9,7 @@
     tools:context=".SignInActivity">
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/btnVoltarTelaInicial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
@@ -26,7 +26,7 @@
         android:scaleType="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoltarTelaInicial"
         app:srcCompat="@drawable/vanicon" />
 
     <TextView
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSignInMotorista"
         style="@style/btnPreenchido"
         android:layout_width="312dp"
         android:layout_height="48.52dp"
@@ -88,7 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/btnSignInMotorista"
         app:srcCompat="@drawable/bgsingin" />
 
     <ImageView
@@ -98,8 +98,8 @@
         android:layout_marginTop="13dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView5"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/btnSignInMotorista"
+        app:layout_constraintTop_toTopOf="@+id/btnSignInMotorista"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/baseline_arrow_forward_24" />
 
@@ -110,7 +110,7 @@
         android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignInMotorista"
         app:srcCompat="@drawable/peopleicon" />
 
     <TextView
@@ -132,7 +132,7 @@
     <Button
         android:id="@+id/button2"
         style="@style/btnPreenchido"
-        android:layout_width="0dp"
+        android:layout_width="312dp"
         android:layout_height="48.52dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="35dp"
@@ -141,5 +141,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="@+id/button2"
+        app:srcCompat="@drawable/baseline_arrow_forward_24" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="208dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="84dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="53dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
