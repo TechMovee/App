@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -53,4 +54,8 @@ dependencies {
     // Dependência uCrop
     implementation("com.github.yalantis:ucrop:2.2.8")
     implementation("com.google.android.material:material:1.9.0") // Certifique-se de que o Jitpack foi adicionado
+
+    // Firebase Authentication
+    implementation("com.google.firebase:firebase-auth:21.0.1")
+
 }

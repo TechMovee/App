@@ -2,7 +2,6 @@ package com.example.techmovee;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,19 +11,20 @@ import android.widget.ImageView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 
 public class SignInMotorista extends AppCompatActivity {
+
+    //foto
     private static final String[] REQUIRED_PERMISSIONS = {
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
     private ImageView photo;
     private ImageView btnAddProfilePicture;
     private Uri imageUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class SignInMotorista extends AppCompatActivity {
 
         photo = findViewById(R.id.photo);
 
-        // Botão para abrir a galeria
+//      Botão para abrir a galeria
         btnAddProfilePicture = findViewById(R.id.btnAddProfilePicture);
         btnAddProfilePicture.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
