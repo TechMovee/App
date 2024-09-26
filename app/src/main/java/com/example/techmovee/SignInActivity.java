@@ -34,7 +34,7 @@ public class SignInActivity extends AppCompatActivity {
         });
 
         btnSignInMotorista.setOnClickListener(v -> {
-            Intent intent = new Intent(SignInActivity.this, SignInMotorista.class);
+            Intent intent = new Intent(SignInActivity.this, SignInDriver.class);
             startActivity(intent);
             finish();
         });

@@ -15,7 +15,9 @@ import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 
-public class SignInMotorista extends AppCompatActivity {
+public class SignInDriver extends AppCompatActivity {
+
+    ImageView btnGoBack;
 
     //foto
     private static final String[] REQUIRED_PERMISSIONS = {
@@ -31,13 +33,21 @@ public class SignInMotorista extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in_motorista);
 
+        btnGoBack = findViewById(R.id.btnGoBack);
         photo = findViewById(R.id.photo);
+
+
 
 //      Botão para abrir a galeria
         btnAddProfilePicture = findViewById(R.id.btnAddProfilePicture);
         btnAddProfilePicture.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             resultLauncherGaleria.launch(intent);
+        });
+        btnGoBack.setOnClickListener(v -> {
+            Intent intent = new Intent(SignInDriver.this, SignInActivity.class);
+            startActivity(intent);
+            finish();
         });
 
     }
@@ -57,7 +67,7 @@ public class SignInMotorista extends AppCompatActivity {
                                 .withAspectRatio(1, 1)  // Proporção 1:1 para manter o círculo
                                 .withMaxResultSize(500, 500)  // Tamanho máximo da imagem resultante
                                 .withOptions(options)
-                                .start(SignInMotorista.this);
+                                .start(SignInDriver.this);
                     }
                 }
             }
