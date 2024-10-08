@@ -18,11 +18,16 @@
         android:theme="@style/Theme.TechMovee"
         tools:targetApi="31">
         <activity
-            android:name=".SingInDriverContinued"
+            android:name=".responsible.SignInResponsible"
             android:exported="false" />
         <activity
-            android:name=".SignInDriver"
+            android:name=".driver.SignInDriverContinued"
+            android:persistableMode="persistAcrossReboots"
+            android:exported="false" />
+        <activity
+            android:name=".driver.SignInDriver"
             android:exported="false"
+            android:persistableMode="persistAcrossReboots"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".SignInActivity"
