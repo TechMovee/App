@@ -1,20 +1,16 @@
 package com.example.techmovee;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
-import android.widget.MediaController;
-import android.widget.VideoView;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.bumptech.glide.Glide;
 
 public class SplashScreen extends AppCompatActivity {
 
