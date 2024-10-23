@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnCadastro;
     Button btnLogin;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
