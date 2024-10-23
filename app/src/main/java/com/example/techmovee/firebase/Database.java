@@ -3,6 +3,8 @@ package com.example.techmovee.firebase;
 import android.util.Log;
 
 import com.example.techmovee.driver.Motorista;
+import com.example.techmovee.filho.Filho;
+import com.example.techmovee.responsible.Responsavel;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -50,4 +52,44 @@ public class Database {
 //
 //                });
     }
+
+    public void inserirResponsavel(Responsavel responsavel) {
+
+        Map<String, Object> responsavelData = new HashMap<>();
+        responsavelData.put("nome", responsavel.getNome());
+        responsavelData.put("email", responsavel.getEmail());
+        responsavelData.put("senha", responsavel.getSenha());
+        responsavelData.put("cpf", responsavel.getCpf());
+        responsavelData.put("cep", responsavel.getCep());
+        responsavelData.put("telefone", responsavel.getTelefone());
+        responsavelData.put("dataNascimento", responsavel.getDataNascimento());
+        responsavelData.put("imageUrl", responsavel.getImageUrl());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("responsavel")
+                .add(responsavelData)
+                .addOnSuccessListener(documentReference -> Log.d("Firebase", "User added with ID: " + documentReference.getId()))
+                .addOnFailureListener(e -> Log.w("Firebase", "Error adding user", e));
+
+
+    }
+
+    public void inserirFilho(Filho filho) {
+
+        Map<String, Object> filhoData = new HashMap<>();
+        filhoData.put("nome", filho.getNome());
+        filhoData.put("cpf", filho.getCpf());
+        filhoData.put("idade", filho.getIdade());
+        filhoData.put("serie", filho.getSerie());
+        filhoData.put("deficiencia", filho.getDeficiente());
+        filhoData.put("imageUrl", filho.getImageUrl());
+        Log.d("Database", "Filho: " + filho.getSerie());
+        Log.d("Database", "Filho: " + filhoData);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("filhos")
+                .add(filhoData)
+                .addOnSuccessListener(documentReference -> Log.d("Firebase", "User added with ID: " + documentReference.getId()))
+                .addOnFailureListener(e -> Log.w("Firebase", "Error adding user", e));
+    }
+
 }

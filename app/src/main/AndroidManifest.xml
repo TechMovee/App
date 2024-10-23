@@ -13,17 +13,51 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TechMovee"
+        android:theme="@style/Theme.ConnectVans"
         tools:targetApi="31">
+        <activity
+            android:name=".pages.EditarPerfil.EditarPerfilContinued"
+            android:exported="false" />
+        <activity
+            android:name=".pages.EditarPerfil.EditarPerfil"
+            android:exported="false" />
+        <activity
+            android:name=".pages.FragmentMap"
+            android:exported="false" />
+        <activity
+            android:name=".pages.FragmentPerfil"
+            android:exported="false" />
+        <activity
+            android:name=".pages.FragmentDriver"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false"/>
+
+        <activity
+            android:name=".filho.SignInSonContinued"
+            android:exported="false" />
+        <activity
+            android:name=".filho.SignInSon"
+            android:exported="false" />
+        <activity
+            android:name=".van.SignInVanContinued"
+            android:exported="false" />
+        <activity
+            android:name=".van.SignInVan"
+            android:exported="false" />
+        <activity
+            android:name=".responsible.SignInResponsibleContinued"
+            android:exported="false" />
         <activity
             android:name=".responsible.SignInResponsible"
             android:exported="false" />
         <activity
             android:name=".driver.SignInDriverContinued"
-            android:persistableMode="persistAcrossReboots"
-            android:exported="false" />
+            android:exported="false"
+            android:persistableMode="persistAcrossReboots" />
         <activity
             android:name=".driver.SignInDriver"
             android:exported="false"
@@ -35,18 +69,17 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".SplashScreen"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

@@ -2,6 +2,7 @@ package com.example.techmovee.driver;
 
 import android.Manifest;
 import android.content.Intent;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,8 +21,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.techmovee.R;
 import com.example.techmovee.SignInActivity;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -50,15 +54,13 @@ public class SignInDriver extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in_motorista);
+        setContentView(R.layout.activity_sing_in_driver);
 
         edtNome = findViewById(R.id.nome);
         edtEmail = findViewById(R.id.email);
         edtPassword = findViewById(R.id.senha);
         edtPasswordConfirm = findViewById(R.id.confSenha);
         photo = findViewById(R.id.photo);
-
-        layout = findViewById(R.id.textInputLayout7); // Corrigido aqui para usar a variável layout
 
         edtPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
         edtPasswordConfirm.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -121,14 +123,13 @@ public class SignInDriver extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) { }
         });
-
         btnSignIn.setOnClickListener(v -> {
             uploadImageAndNavigate();
         });
 
         btnGoBack = findViewById(R.id.btnGoBack);
 
-        // Botão para abrir a galeria
+//      Botão para abrir a galeria
         btnAddProfilePicture = findViewById(R.id.btnAddProfilePicture);
         btnAddProfilePicture.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -139,7 +140,6 @@ public class SignInDriver extends AppCompatActivity {
             Intent intent = new Intent(SignInDriver.this, SignInActivity.class);
             startActivity(intent);
         });
-
         // Restaurar o estado se disponível
         if (savedInstanceState != null) {
             edtNome.setText(savedInstanceState.getString("nome", ""));
@@ -148,6 +148,8 @@ public class SignInDriver extends AppCompatActivity {
             edtPasswordConfirm.setText(savedInstanceState.getString("senha", ""));
         }
 
+
+
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -155,6 +157,8 @@ public class SignInDriver extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // Esconde os botões de navegação
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // Esconde a barra de status
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY); // Mantém o modo imersivo
+
+
     }
 
     // Launcher para abrir a galeria
@@ -198,6 +202,8 @@ public class SignInDriver extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -211,6 +217,7 @@ public class SignInDriver extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
+
 
     // Método para validar o nome
     private void validateName() {
@@ -240,7 +247,7 @@ public class SignInDriver extends AppCompatActivity {
 
         // Verificar se o email contém "@" e termina com um domínio válido
         if (!emailInput.matches("^[\\w-.]+@[\\w-]+\\.[a-z]{2,3}(\\.[a-z]{2,3})?$")) {
-            edtEmail.setError("Email inválido.");
+            edtEmail.setError("Email inválido. Deve conter '@' e um domínio válido.");
             btnSignIn.setEnabled(false);
             return;
         }
@@ -252,58 +259,111 @@ public class SignInDriver extends AppCompatActivity {
 
     // Método para validar a senha
     private void validatePassword() {
-        String passwordInput = edtPassword.getText().toString();
-        String passwordConfirmInput = edtPasswordConfirm.getText().toString();
+        String passwordInput = edtPassword.getText().toString().trim();
+        String confirmPasswordInput = edtPasswordConfirm.getText().toString().trim();
 
-        // Verifica se a senha é válida
-        if (passwordInput.length() < 6) {
-            edtPassword.setError("A senha deve ter pelo menos 6 caracteres.");
+        // Verificar se a senha contém espaços
+        if (passwordInput.contains(" ")) {
+            edtPassword.setError("Espaços não são permitidos.", null);
             btnSignIn.setEnabled(false);
             return;
         }
 
-        // Verifica se a confirmação da senha é igual à senha
-        if (!passwordInput.equals(passwordConfirmInput)) {
-            edtPasswordConfirm.setError("As senhas não correspondem.");
+        // Verificar se a senha tem pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial
+        if (!passwordInput.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!.]).{8,}$")) {
+            edtPassword.setError("A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.",null);
             btnSignIn.setEnabled(false);
             return;
         }
 
-        // Se as senhas forem válidas, habilitar o botão
+        // Verificar se a senha e a confirmação de senha são iguais
+        if (!passwordInput.equals(confirmPasswordInput)) {
+            edtPasswordConfirm.setError("As senhas não coincidem.", null);
+            btnSignIn.setEnabled(false);
+            return;
+        }
+
+        // Se a senha for válida, limpar os erros e habilitar o botão
         edtPassword.setError(null); // Limpa o erro
         edtPasswordConfirm.setError(null); // Limpa o erro
         btnSignIn.setEnabled(true);
     }
 
-    // Método para fazer upload da imagem e navegar para a próxima tela
     private void uploadImageAndNavigate() {
-        if (imageUri == null) {
-            Toast.makeText(this, "Adicione uma foto de perfil.", Toast.LENGTH_SHORT).show();
+        String nome = edtNome.getText().toString().trim();
+        String email = edtEmail.getText().toString().trim();
+        String senha = edtPassword.getText().toString().trim();
+        String confirmSenha = edtPasswordConfirm.getText().toString().trim();
+
+        if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || confirmSenha.isEmpty()) {
+            Toast.makeText(SignInDriver.this, "Por favor, preencha todos os campos obrigatórios.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Obtenha uma referência ao Firebase Storage
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageReference = storage.getReference("profile_images/" + UUID.randomUUID().toString());
+        if (!senha.equals(confirmSenha)) {
+            Toast.makeText(SignInDriver.this, "As senhas não coincidem.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        // Faça o upload da imagem
-        storageReference.putFile(imageUri)
-                .addOnSuccessListener(taskSnapshot -> {
-                    Toast.makeText(SignInDriver.this, "Imagem enviada com sucesso!", Toast.LENGTH_SHORT).show();
+
+        if (imageUri != null) {
+            String fileName = UUID.randomUUID().toString();
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference("gs//techmovee-4a854.appspot.com/" + fileName);
+
+            storageReference.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
+                storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                    String imageUrl = uri.toString();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("nome", nome);
+                    bundle.putString("email", email);
+                    bundle.putString("senha", senha);
+                    bundle.putString("imageUrl", imageUrl);
+
                     Intent intent = new Intent(SignInDriver.this, SignInDriverContinued.class);
-                    intent.putExtra("profileImageUri", imageUri.toString());
+                    intent.putExtras(bundle);
                     startActivity(intent);
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(SignInDriver.this, "Erro ao enviar imagem: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+            }).addOnFailureListener(e -> {
+                Toast.makeText(SignInDriver.this, "Erro ao fazer upload da imagem.", Toast.LENGTH_SHORT).show();
+            });
+        } else {
+            // Caso a imagem não seja obrigatória, apenas passe os dados
+            Bundle bundle = new Bundle();
+            bundle.putString("nome", nome);
+            bundle.putString("email", email);
+            bundle.putString("senha", senha);
+
+            Intent intent = new Intent(SignInDriver.this, SignInDriverContinued.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
     }
 
+
+    //Restaurar Pagina
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
+        // Salvar os valores dos campos no Bundle
         outState.putString("nome", edtNome.getText().toString());
         outState.putString("email", edtEmail.getText().toString());
         outState.putString("senha", edtPassword.getText().toString());
+        outState.putString("senhaConfirmada", edtPasswordConfirm.getText().toString());
     }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restaurar os dados do nome, email, senha e confirmação de senha
+        if (savedInstanceState != null) {
+            edtNome.setText(savedInstanceState.getString("nome"));
+            edtEmail.setText(savedInstanceState.getString("email"));
+            edtPassword.setText(savedInstanceState.getString("senha"));
+            edtPasswordConfirm.setText(savedInstanceState.getString("senhaConfirmada"));
+        }
+    }
+
+
 }
