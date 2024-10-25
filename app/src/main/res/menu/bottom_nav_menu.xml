@@ -1,0 +1,16 @@
+<!-- res/menu/bottom_navigation_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_driver"
+        android:icon="@drawable/iconhome"
+        android:title="" />
+    <item
+        android:id="@+id/menu_map"
+        android:icon="@drawable/iconmap"
+        android:title="" />
+    <item
+        android:id="@+id/menu_perfil"
+        android:icon="@drawable/iconperfil"
+        android:title="" />
+</menu>

@@ -1,6 +1,8 @@
 package com.example.techmovee.driver;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,12 +16,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.techmovee.filho.SignInSon;
 import com.example.techmovee.firebase.Database;
 import com.example.techmovee.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.UUID;
 
 public class SignInDriverContinued extends AppCompatActivity {
 
@@ -62,7 +70,7 @@ public class SignInDriverContinued extends AppCompatActivity {
             String nome = bundle.getString("nome");
             String email = bundle.getString("email");
             String senha = bundle.getString("senha");
-            String imageUrl = bundle.getString("imageUrl");
+            String imageUri = bundle.getString("imageUrl");
 
             String cepValue = cep.getText().toString();
             String telefoneValue = telefone.getText().toString();
@@ -75,22 +83,71 @@ public class SignInDriverContinued extends AppCompatActivity {
                 return; // Interrompe a execução se algum campo estiver vazio
             }
 
-            bundle.putString("nome", nome);
-            bundle.putString("cpf", cpfValue);
-            bundle.putString("email", email);
-            bundle.putString("senha", senha);
-            bundle.putString("dataNascimento", dataNascimentoValue);
-            bundle.putString("cep", cepValue);
-            bundle.putString("telefone", telefoneValue);
-            bundle.putString("imageUrl", imageUrl);
 
-            Motorista motorista = new Motorista(nome, email, senha, cpfValue, cepValue, telefoneValue, dataNascimentoValue, imageUrl);
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            auth.createUserWithEmailAndPassword(email, senha)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            if (imageUri != null) {
+                                String fileName = UUID.randomUUID().toString();
+                                StorageReference storageReference = FirebaseStorage.getInstance().getReference("gs//techmovee-4a854.appspot.com/" + fileName);
 
-            // Criando um objeto da classe Database e chamando o método de inserção
-            Database db = new Database();
-            db.inserirMotorista(motorista);
+                                storageReference.putFile(Uri.parse(imageUri)).addOnSuccessListener(taskSnapshot -> {
+                                    storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                                        String imageUrl = uri.toString();
 
-            Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                                        bundle.putString("nome", nome);
+                                        bundle.putString("cpf", cpfValue);
+                                        bundle.putString("email", email);
+                                        bundle.putString("senha", senha);
+                                        bundle.putString("dataNascimento", dataNascimentoValue);
+                                        bundle.putString("cep", cepValue);
+                                        bundle.putString("telefone", telefoneValue);
+                                        bundle.putString("imageUrl", imageUri);
+
+                                        Motorista motorista = new Motorista(nome, email, senha, cpfValue, cepValue, telefoneValue, dataNascimentoValue, imageUri);
+
+                                        // Criando um objeto da classe Database e chamando o método de inserção
+                                        Database db = new Database();
+                                        db.inserirMotorista(motorista);
+
+                                        Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                                    });
+                                }).addOnFailureListener(e -> {
+                                    Toast.makeText(SignInDriverContinued.this, "Erro ao fazer upload da imagem.", Toast.LENGTH_SHORT).show();
+                                });
+                            } else {
+                                // Caso a imagem não seja obrigatória, apenas passe os dados
+
+                                bundle.putString("nome", nome);
+                                bundle.putString("cpf", cpfValue);
+                                bundle.putString("email", email);
+                                bundle.putString("senha", senha);
+                                bundle.putString("dataNascimento", dataNascimentoValue);
+                                bundle.putString("cep", cepValue);
+                                bundle.putString("telefone", telefoneValue);
+                                bundle.putString("imageUrl", imageUri);
+
+                                Motorista motorista = new Motorista(nome, email, senha, cpfValue, cepValue, telefoneValue, dataNascimentoValue, imageUri);
+
+                                // Criando um objeto da classe Database e chamando o método de inserção
+                                Database db = new Database();
+                                db.inserirMotorista(motorista);
+
+                                Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                Toast.makeText(SignInDriverContinued.this, "Este email já está cadastrado.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(SignInDriverContinued.this, "Erro ao cadastrar: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+            Intent intent = new Intent(SignInDriverContinued.this, SignInSon.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            Toast.makeText(SignInDriverContinued.this, "Responsável cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
         });
 
 
@@ -108,6 +165,57 @@ public class SignInDriverContinued extends AppCompatActivity {
         btnGoBack.setOnClickListener(v -> {
             finish();
         });
+
+
+
+
+        telefone.addTextChangedListener(new TextWatcher() {
+            private boolean isUpdating;
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (isUpdating) { return; }
+
+                isUpdating = true;
+                String unformatted = s.toString().replaceAll("[^\\d]", ""); // Remove tudo que não for número
+
+                if (unformatted.length() > 11) {
+                    unformatted = unformatted.substring(0, 11); // Limita a 11 dígitos
+                }
+
+                StringBuilder formatted = new StringBuilder();
+                int length = unformatted.length();
+
+                if (length > 0) {
+                    formatted.append("(");
+                    formatted.append(unformatted.substring(0, Math.min(length, 2))); // DDD
+                    if (length >= 3) {
+                        formatted.append(") ");
+                        formatted.append(unformatted.substring(2, Math.min(length, 7))); // Primeira parte do número
+                        if (length >= 8) {
+                            formatted.append("-");
+                            formatted.append(unformatted.substring(7)); // Segunda parte do número
+                        }
+                    }
+                }
+                telefone.setText(formatted.toString());
+                // Verificação para garantir que a posição não exceda o comprimento do texto
+                int selectionPosition = formatted.length();
+
+                if (selectionPosition > telefone.getText().length()) {
+                    selectionPosition = telefone.getText().length();
+                }
+                telefone.setSelection(selectionPosition); // Define a posição da seleção corretamente
+                isUpdating = false;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
 
         cpf.addTextChangedListener(new TextWatcher() {
             private boolean isUpdating = false;
