@@ -18,7 +18,7 @@ public interface ApiService {
     Call<Motorista> createMotorista(@Body Motorista motorista);
 
     //salvar responsavel
-    @POST("responsaveis")
+    @POST("/responsavel/inserirResponsavel")
     Call<Responsavel> createResponsavel(@Body Responsavel responsavel);
 
     //buscar responsavel
