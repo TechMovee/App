@@ -68,7 +68,8 @@
         app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView12">
+        app:layout_constraintTop_toTopOf="@+id/imageView12"
+        app:startIconDrawable="@drawable/baseline_book_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/serie"
@@ -94,7 +95,8 @@
         app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:startIconDrawable="@drawable/baseline_school_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/escola"

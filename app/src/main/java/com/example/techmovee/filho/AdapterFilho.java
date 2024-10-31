@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.techmovee.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterFilho extends RecyclerView.Adapter<AdapterFilho.MeuViewHolder> {
@@ -26,7 +25,7 @@ public class AdapterFilho extends RecyclerView.Adapter<AdapterFilho.MeuViewHolde
     @Override
     public AdapterFilho.MeuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // carregar o Template de visualização
-        View viewItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.filho_card,parent,false);
+        View viewItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.son_info_card,parent,false);
 
         // chamar o MeuViewHolder para carregar os dados
         return new MeuViewHolder(viewItem);

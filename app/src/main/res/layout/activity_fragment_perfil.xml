@@ -216,6 +216,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView10"
-        tools:listitem="@layout/filho_card" />
+        tools:listitem="@layout/son_info_card" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

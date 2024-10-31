@@ -31,7 +31,7 @@ public class SignInDriver extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in_motorista);
+        setContentView(R.layout.activity_sing_in_driver);
 
         btnGoBack = findViewById(R.id.btnGoBack);
         photo = findViewById(R.id.photo);
