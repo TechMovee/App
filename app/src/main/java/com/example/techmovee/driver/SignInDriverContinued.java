@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.techmovee.SignInDriver;
-import com.example.techmovee.filho.SignInSon;
 import com.example.techmovee.firebase.Database;
 import com.example.techmovee.R;
 import com.example.techmovee.van.SignInVan;
@@ -163,7 +162,7 @@ public class SignInDriverContinued extends AppCompatActivity {
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
         });
 
-        btnGoBack = findViewById(R.id.btnGoBack3);
+        btnGoBack = findViewById(R.id.btnGoBack);
         btnGoBack.setOnClickListener(v -> {
             Intent intent = new Intent(SignInDriverContinued.this, SignInDriver.class);
             startActivity(intent);

@@ -1,7 +1,9 @@
 package com.example.techmovee;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Login extends AppCompatActivity {
+
+    ImageView btnGoBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,12 @@ public class Login extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        btnGoBack = findViewById(R.id.btnGoBack);
+        btnGoBack.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         });
     }
 
