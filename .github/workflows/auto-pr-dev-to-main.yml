@@ -21,4 +21,4 @@ jobs:
           pr_title: "Auto PR: Merge Dev into Main"
           pr_body: "This PR was automatically created to merge changes from dev to main."
           pr_draft: false
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.token }}
