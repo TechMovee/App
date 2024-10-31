@@ -109,13 +109,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        app:startIconDrawable="@drawable/baseline_place_24">
+        app:startIconDrawable="@drawable/baseline_directions_car_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:cursorVisible="true"
-            android:inputType="number"
+            android:inputType="text|textAutoComplete"
             android:maxLength="9"
             android:paddingStart="40dp"
             android:textColor="#000000"
@@ -143,7 +143,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:cursorVisible="true"
-            android:inputType="number"
+            android:inputType="text"
             android:maxLength="14"
             android:paddingStart="40dp"
             android:textColor="#000000"
