@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.techmovee.filho.SignInSon;
 import com.example.techmovee.firebase.Database;
 import com.example.techmovee.R;
+import com.example.techmovee.van.SignInVan;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.storage.FirebaseStorage;
@@ -144,10 +145,10 @@ public class SignInDriverContinued extends AppCompatActivity {
                             }
                         }
                     });
-            Intent intent = new Intent(SignInDriverContinued.this, SignInSon.class);
+            Intent intent = new Intent(SignInDriverContinued.this, SignInVan.class);
             intent.putExtras(bundle);
             startActivity(intent);
-            Toast.makeText(SignInDriverContinued.this, "Responsável cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
         });
 
 

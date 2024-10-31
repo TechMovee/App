@@ -11,6 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.techmovee.driver.SignInDriverContinued;
+import com.example.techmovee.van.SignInVan;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btnCadastro;
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
 
         btnCadastro.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+            Intent intent = new Intent(MainActivity.this, SignInVan.class);
             startActivity(intent);
         });
 
