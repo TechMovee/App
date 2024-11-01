@@ -36,7 +36,12 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
 
         btnCadastro.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SignInVan.class);
+            Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+            startActivity(intent);
+        });
+
+        btnLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Login.class);
             startActivity(intent);
         });
 

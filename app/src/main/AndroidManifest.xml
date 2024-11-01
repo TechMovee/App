@@ -18,6 +18,10 @@
         android:theme="@style/Theme.ConnectVans"
         tools:targetApi="31">
         <activity
+            android:name=".Login"
+            android:exported="false"
+            android:theme="@style/Theme.ConnectVans" />
+        <activity
             android:name=".pages.EditarPerfil.EditarPerfilContinued"
             android:exported="false" />
         <activity
@@ -34,8 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity2"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".filho.SignInSonContinued"
             android:exported="false" />
@@ -73,6 +76,7 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

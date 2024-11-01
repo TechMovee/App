@@ -149,16 +149,6 @@ public class SignInDriver extends AppCompatActivity {
         }
 
 
-
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // Esconde os botões de navegação
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN // Esconde a barra de status
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY); // Mantém o modo imersivo
-
-
     }
 
     // Launcher para abrir a galeria
