@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+
 }
 
 android {
@@ -51,6 +53,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -58,6 +61,10 @@ dependencies {
     // Dependência Glide
     implementation("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+
+    //Dependencia Picasso
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
 
     // Dependência uCrop
     implementation("com.github.yalantis:ucrop:2.2.8")
