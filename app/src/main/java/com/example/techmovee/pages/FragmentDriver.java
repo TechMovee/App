@@ -18,7 +18,6 @@ import com.example.techmovee.R;
 import com.example.techmovee.SpaceItemDecoration;
 import com.example.techmovee.driver.AdapterMotorista;
 import com.example.techmovee.driver.Motorista;
-import com.example.techmovee.listaMotorista.ListaMotoristaAdapter;
 import com.example.techmovee.van.Van;
 
 import java.util.ArrayList;
