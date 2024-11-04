@@ -2,7 +2,6 @@ package com.example.techmovee.responsible;
 
 public class Responsavel {
 
-    private long id;
     private String nome;
     private String email;
     private String senha;
@@ -28,13 +27,6 @@ public class Responsavel {
     }
 
 
-
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
