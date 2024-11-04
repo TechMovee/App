@@ -18,9 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.techmovee.ApiService;
 import com.example.techmovee.RetrofitClient;
-import com.example.techmovee.driver.Motorista;
-import com.example.techmovee.pages.FragmentPerfil;
-import com.example.techmovee.responsible.SignInResponsibleContinued;
 import com.example.techmovee.filho.SignInSon;
 import com.example.techmovee.firebase.Database;
 import com.example.techmovee.R;
@@ -402,8 +399,7 @@ public class SignInResponsibleContinued extends AppCompatActivity {
 
 
     private void chamarApi(Responsavel responsavel){
-        String API = "http";
-        ApiService apiService = RetrofitClient.getClient(API).create(ApiService.class);
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
         Call<Responsavel> call = apiService.createResponsavel(responsavel);
 
         call.enqueue(new Callback<Responsavel>() {
@@ -411,12 +407,17 @@ public class SignInResponsibleContinued extends AppCompatActivity {
             public void onResponse(Call<Responsavel> call, Response<Responsavel> response) {
                 if (response.isSuccessful()){
                     Toast.makeText(SignInResponsibleContinued.this, "Api deu bom", Toast.LENGTH_SHORT).show();
+                    Responsavel responsavelResponse = response.body();
+
+
+                }else {
+                    Toast.makeText(SignInResponsibleContinued.this, "Erro ao cadastrar: " + response.message(), Toast.LENGTH_SHORT).show();
                 }
 
             }
             @Override
             public void onFailure(Call<Responsavel> call, Throwable t) {
-                Toast.makeText(SignInResponsibleContinued.this, "Api deu ruim", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInResponsibleContinued.this, "Erro de conexão: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
