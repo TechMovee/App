@@ -1,8 +1,9 @@
 package com.example.techmovee.driver;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Motorista {
 
-    private long id;
     private String nome;
     private String email;
     private String senha;
@@ -10,6 +11,8 @@ public class Motorista {
     private String cpf;
     private String cep;
     private String telefone;
+
+    @SerializedName("dt_nascimento") // Mapeia o nome do campo do JSON para o campo dataNascimento
     private String dataNascimento;
     private String imageUrl;
 
@@ -30,12 +33,6 @@ public class Motorista {
 
 
 
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;

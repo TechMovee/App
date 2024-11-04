@@ -21,14 +21,29 @@
 
     <TextView
         android:id="@+id/tv_forum"
-        android:layout_width="251dp"
-        android:layout_height="26dp"
+        android:layout_width="335dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="204dp"
-        android:text="Map Fragment"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
+        android:layout_marginEnd="1dp"
+        android:gravity="center"
+        android:text="parece que você ainda não se conectou com nenhum motorista"
+        android:textColor="#21445B"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/background2" />
+
+    <Button
+        android:id="@+id/conectar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FAB744"
+        android:text="Conectar"
+        android:textColor="#21445B"
+        app:layout_constraintEnd_toEndOf="@+id/tv_forum"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_forum"
+        app:layout_constraintTop_toBottomOf="@+id/tv_forum" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

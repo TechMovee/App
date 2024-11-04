@@ -9,7 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.techmovee.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -32,6 +34,8 @@ public class AdapterFilho extends RecyclerView.Adapter<AdapterFilho.MeuViewHolde
     }
     @Override
     public void onBindViewHolder(@NonNull AdapterFilho.MeuViewHolder holder, int position) {
+        Picasso.get().load(listaFilho.get(position).getImageUrl()).into(holder.foto);
+
         holder.nome.setText(listaFilho.get(position).getNome());
         holder.escola.setText(listaFilho.get(position).getEscola());
         holder.idade.setText(listaFilho.get(position).getIdade());
