@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "258410390884",
+    "project_id": "techmovee-4a854",
+    "storage_bucket": "techmovee-4a854.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258410390884:android:a85f408e784ac14ce00671",
+        "android_client_info": {
+          "package_name": "com.example.techmovee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPs6QUa328tgjOIA4iPDOsfc630g8Rfac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
