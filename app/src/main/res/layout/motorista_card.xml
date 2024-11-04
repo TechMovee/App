@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="30dp"
+    tools:context=".driver.AdapterMotorista">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
+
+
+        <Button
+            android:id="@+id/btnContatar"
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#FAB744"
+            android:text="Contatar"
+            android:textColor="#21445B"
+            app:layout_constraintBottom_toBottomOf="@+id/foto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/foto"
+            app:layout_constraintTop_toBottomOf="@+id/nome"
+            app:layout_constraintVertical_bias="0.631" />
+
+        <TextView
+            android:id="@+id/nome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/foto"
+            app:layout_constraintTop_toTopOf="@+id/foto" />
+
+        <ImageView
+            android:id="@+id/foto"
+            android:layout_width="89dp"
+            android:layout_height="85dp"
+            android:src="@drawable/fotofihlo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Escola"
+            app:layout_constraintStart_toStartOf="@+id/foto"
+            app:layout_constraintTop_toBottomOf="@+id/foto" />
+
+        <TextView
+            android:id="@+id/escola"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="@+id/textView22"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Telefone"
+            app:layout_constraintStart_toStartOf="@+id/escola"
+            app:layout_constraintTop_toBottomOf="@+id/escola" />
+
+        <TextView
+            android:id="@+id/telefone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="@+id/textView31"
+            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Idade"
+            app:layout_constraintBottom_toBottomOf="@+id/textView22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.57"
+            app:layout_constraintStart_toEndOf="@+id/textView22"
+            app:layout_constraintTop_toTopOf="@+id/textView22"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/idade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="@+id/textView33"
+            app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valor"
+            app:layout_constraintBottom_toBottomOf="@+id/textView31"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.017"
+            app:layout_constraintStart_toStartOf="@+id/idade"
+            app:layout_constraintTop_toTopOf="@+id/textView31"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/valor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="@+id/textView35"
+            app:layout_constraintTop_toBottomOf="@+id/textView35" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
