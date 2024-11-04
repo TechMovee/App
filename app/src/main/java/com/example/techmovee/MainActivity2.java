@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.techmovee.pages.FragmentMap2;
 import com.example.techmovee.pages.FragmentPerfil;
 import com.example.techmovee.pages.FragmentDriver;
 import com.example.techmovee.pages.FragmentMap;
@@ -26,7 +27,7 @@ public class MainActivity2 extends AppCompatActivity {
             if(item.getItemId() == R.id.menu_driver){
                 selectedFragment = new FragmentDriver();
             } else if(item.getItemId() == R.id.menu_map){
-                selectedFragment = new FragmentMap();
+                selectedFragment = new FragmentMap2();
             }
 
             else if(item.getItemId() == R.id.menu_perfil){
