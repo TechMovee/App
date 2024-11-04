@@ -25,14 +25,6 @@ public class SplashScreen extends AppCompatActivity {
             return insets;
         });
 
-        ImageView imageView = findViewById(R.id.imageView);
-
-        // Carrega o GIF do diretório raw
-//        Glide.with(this)
-//                .asGif()
-//                .load(R.raw.gif)  // substitua 'nome_do_gif' pelo nome do arquivo .gif
-//                .into(imageView);
-
 //        //SplashScreen
         Handler handle = new Handler();
         handle.postDelayed(new Runnable() {

@@ -1,5 +1,6 @@
 package com.example.techmovee;
 
+import com.example.techmovee.comments.Comments;
 import com.example.techmovee.driver.Motorista;
 import com.example.techmovee.responsible.Responsavel;
 import com.example.techmovee.van.Van;
@@ -28,5 +29,13 @@ public interface ApiService {
     //buscar responsavel
     @GET("responsaveis")
     Call<List<Responsavel>> getResponsaveis();
+
+    //buscar comentários de avaliação
+    @GET("/api/list")
+    Call<List<Comments>> getAllComments();
+
+    //adicionar comentários
+    @POST("/api/add")
+    Call<Void> addComment(@Body Comments comment);
 
 }

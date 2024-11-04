@@ -11,6 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.techmovee.driver.SignInDriverContinued;
+import com.example.techmovee.van.SignInVan;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btnCadastro;
@@ -34,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnCadastro.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+            startActivity(intent);
+        });
+
+        btnLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Login.class);
             startActivity(intent);
         });
 

@@ -32,7 +32,6 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -179,7 +178,7 @@ public class SignInResponsibleContinued extends AppCompatActivity {
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
         });
 
-        btnGoBack = findViewById(R.id.btnGoBack3);
+        btnGoBack = findViewById(R.id.btnGoBack);
         btnGoBack.setOnClickListener(v -> {
             finish();
         });

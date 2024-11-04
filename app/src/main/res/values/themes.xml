@@ -6,6 +6,7 @@
     </style>
 
     <style name="Theme.ConnectVans" parent="Base.Theme.ConnectVans" />
+
     <style name="btnPreenchido" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerRadius">10dp</item>

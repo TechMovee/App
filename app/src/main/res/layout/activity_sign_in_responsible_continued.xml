@@ -47,7 +47,7 @@
 
 
     <ImageView
-        android:id="@+id/btnGoBack3"
+        android:id="@+id/btnGoBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
@@ -68,7 +68,8 @@
         app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView20">
+        app:layout_constraintTop_toTopOf="@+id/imageView20"
+        app:startIconDrawable="@drawable/baseline_place_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cep"
@@ -96,7 +97,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:startIconDrawable="@drawable/baseline_local_phone_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/telefone"
@@ -123,7 +125,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:startIconDrawable="@drawable/baseline_person_search_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cpf"
@@ -158,7 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableEnd="@drawable/baseline_calendar_month_24"
+            android:drawableStart="@drawable/baseline_calendar_month_24"
             android:ems="10"
             android:inputType="datetime|date" />
 

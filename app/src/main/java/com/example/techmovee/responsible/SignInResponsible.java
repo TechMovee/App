@@ -33,10 +33,6 @@ public class SignInResponsible extends AppCompatActivity {
 
     ImageView btnGoBack;
 
-    //foto
-    private static final String[] REQUIRED_PERMISSIONS = {
-            Manifest.permission.READ_EXTERNAL_STORAGE
-    };
     private ImageView photo;
     private ImageView btnAddProfilePicture;
     private Uri imageUri;
@@ -125,7 +121,13 @@ public class SignInResponsible extends AppCompatActivity {
             uploadImageAndNavigate();
         });
 
+        //voltar
         btnGoBack = findViewById(R.id.btnGoBack);
+        btnGoBack.setOnClickListener(v -> {
+            Intent intent = new Intent(com.example.techmovee.responsible.SignInResponsible.this, SignInActivity.class);
+            startActivity(intent);
+        });
+
 
 //      Botão para abrir a galeria
         btnAddProfilePicture = findViewById(R.id.btnAddProfilePicture);
@@ -134,10 +136,7 @@ public class SignInResponsible extends AppCompatActivity {
             resultLauncherGaleria.launch(intent);
         });
 
-        btnGoBack.setOnClickListener(v -> {
-            Intent intent = new Intent(com.example.techmovee.responsible.SignInResponsible.this, SignInActivity.class);
-            startActivity(intent);
-        });
+
         // Restaurar o estado se disponível
         if (savedInstanceState != null) {
             edtNome.setText(savedInstanceState.getString("nome", ""));
@@ -145,16 +144,6 @@ public class SignInResponsible extends AppCompatActivity {
             edtPassword.setText(savedInstanceState.getString("senha", ""));
             edtPasswordConfirm.setText(savedInstanceState.getString("senha", ""));
         }
-
-
-
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // Esconde os botões de navegação
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN // Esconde a barra de status
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY); // Mantém o modo imersivo
 
 
     }
@@ -199,7 +188,6 @@ public class SignInResponsible extends AppCompatActivity {
             // Lidar com erro, se necessário
         }
     }
-
 
 
     @Override
