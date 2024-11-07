@@ -7,29 +7,26 @@ public class Motorista {
     private String nome;
     private String email;
     private String senha;
-//    private String cnh;
     private String cpf;
-    private String cep;
-    private String telefone;
+    private String cnh;
+    private Integer telefone_id;
 
     @SerializedName("dt_nascimento") // Mapeia o nome do campo do JSON para o campo dataNascimento
     private String dataNascimento;
-    private String imageUrl;
+    private Integer imageUrl;
 
 
-    public Motorista(String nome, String email, String senha/*, String cnh*/, String cpf, String cep, String telefone ,String dataNascimento, String imageUrl){
+    public Motorista(String nome, String email, String senha, String cpf, String cnh, Integer telefone_id , String dataNascimento, Integer imageUrl){
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
-//        this.cnh = cnh;
-        this.cep = cep;
-        this.telefone = telefone;
+        this.cnh = cnh;
+        this.telefone_id = telefone_id;
         this.dataNascimento = dataNascimento;
         this.imageUrl = imageUrl;
     }
-    public Motorista() {
-    }
+
 
 
 
@@ -66,28 +63,20 @@ public class Motorista {
         this.senha = senha;
     }
 
-//    public String getCnh() {
-//        return cnh;
-//    }
-//
-//    public void setCnh(String cnh) {
-//        this.cnh = cnh;
-//    }
-
-    public String getCep() {
-        return cep;
+    public String getCnh() {
+        return cnh;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
     }
 
-    public String getTelefone(){
-        return telefone;
+    public Integer getTelefone_id(){
+        return telefone_id;
     }
 
-    public void setTelefone(String telefone){
-        this.telefone = telefone;
+    public void setTelefone_id(Integer telefone_id){
+        this.telefone_id = telefone_id;
     }
 
     public String getDataNascimento(){
@@ -97,10 +86,10 @@ public class Motorista {
     public void setDataNascimento(String dataNascimento){
         this.dataNascimento = dataNascimento;
     }
-    public String getImageUrl() {
+    public Integer getImageUrl() {
         return imageUrl;
     }
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(Integer imageUrl) {
         this.imageUrl = imageUrl;
     }
 

@@ -72,7 +72,7 @@
         app:startIconDrawable="@drawable/baseline_place_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cep"
+            android:id="@+id/cnh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:cursorVisible="true"

@@ -1,8 +1,10 @@
 package com.example.techmovee.filho;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.techmovee.R;
+import com.example.techmovee.pages.Perfil.EditarFilho;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -43,6 +46,14 @@ public class AdapterFilho extends RecyclerView.Adapter<AdapterFilho.MeuViewHolde
         holder.deficiencia.setText(listaFilho.get(position).getDeficiente());
         holder.serieturma.setText(listaFilho.get(position).getSerie());
 
+        holder.editarFilho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EditarFilho.class);
+                v.getContext().startActivity(intent);
+            }
+        });
+
     }
     @Override
     public int getItemCount() {
@@ -54,6 +65,7 @@ public class AdapterFilho extends RecyclerView.Adapter<AdapterFilho.MeuViewHolde
         // criar os elementos de visualização
         ImageView foto;
         TextView nome, escola, idade, periodo, deficiencia, serieturma;
+        ImageView editarFilho;
 
         public MeuViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,6 +76,7 @@ public class AdapterFilho extends RecyclerView.Adapter<AdapterFilho.MeuViewHolde
             periodo = itemView.findViewById(R.id.periodo);
             deficiencia = itemView.findViewById(R.id.deficiencia);
             serieturma = itemView.findViewById(R.id.serieturma);
+            editarFilho = itemView.findViewById(R.id.editarFilho);
         }
     }
 }

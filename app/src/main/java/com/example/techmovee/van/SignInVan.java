@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +42,17 @@ public class SignInVan extends AppCompatActivity {
             Intent intent = new Intent(SignInVan.this, SignInVanContinued.class);
             startActivity(intent);
         });
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.getString("email");
+        String senha = bundle.getString("senha");
+        String nome = bundle.getString("nome");
+        String cpf = bundle.getString("cpf");
+        String dataNascimento = bundle.getString("dataNascimento");
+        String cnh = bundle.getString("cnh");
+        String telefone = bundle.getString("telefone");
+        String imageUrl = bundle.getString("imageUrl");
+
+        Toast.makeText(this, "Nome: "+nome, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -26,8 +26,8 @@ public class Database {
         motoristaData.put("email", motorista.getEmail());
         motoristaData.put("senha", motorista.getSenha());
         motoristaData.put("cpf", motorista.getCpf());
-        motoristaData.put("cep", motorista.getCep());
-        motoristaData.put("telefone", motorista.getTelefone());
+        motoristaData.put("cep", motorista.getCnh());
+        motoristaData.put("telefone", motorista.getTelefone_id());
         motoristaData.put("dataNascimento", motorista.getDataNascimento());
         motoristaData.put("imageUrl", motorista.getImageUrl());
 
@@ -61,7 +61,7 @@ public class Database {
         responsavelData.put("senha", responsavel.getSenha());
         responsavelData.put("cpf", responsavel.getCpf());
         responsavelData.put("cep", responsavel.getCep());
-        responsavelData.put("telefone", responsavel.getTelefone());
+        responsavelData.put("telefone", responsavel.getTelefone_id());
         responsavelData.put("dataNascimento", responsavel.getDataNascimento());
         responsavelData.put("imageUrl", responsavel.getImageUrl());
 

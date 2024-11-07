@@ -42,12 +42,39 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="54dp"
-        android:layout_marginTop="63dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="54dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFiltro"
+        tools:listitem="@layout/motorista_card" />
+
+    <Button
+        android:id="@+id/btnFiltro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="54dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="Filtrar"
+        android:textColor="#F8B643"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campoPesquisar"
-        tools:listitem="@layout/lista_motorista"/>
+        app:strokeColor="#F8B643"
+        app:strokeWidth="1dp" />
+
+    <Spinner
+        android:id="@+id/spinnerFiltro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="54dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/btnFiltro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnFiltro" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

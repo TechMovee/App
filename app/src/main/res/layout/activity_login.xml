@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,7 @@
         app:srcCompat="@drawable/retangulo_laranja" />
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,9 +56,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
         android:layout_marginTop="44dp"
-        android:layout_marginEnd="6dp"
-        app:layout_constraintEnd_toStartOf="@+id/TextInputLayout"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView16"
         app:srcCompat="@drawable/btngoback" />
@@ -135,7 +132,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/btnLogar"
         style="@style/btnPreenchido"
         android:layout_width="303dp"
         android:layout_height="wrap_content"

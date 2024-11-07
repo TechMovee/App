@@ -58,7 +58,7 @@ public class SignInResponsibleContinued extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in_responsible_continued);
 
-        cep = findViewById(R.id.cep);
+        cep = findViewById(R.id.cnh);
         telefone = findViewById(R.id.telefone);
         cpf = findViewById(R.id.cpf);
         dataNascimento = findViewById(R.id.date);
@@ -116,7 +116,7 @@ public class SignInResponsibleContinued extends AppCompatActivity {
                                         bundle.putString("telefone", telefoneValue);
                                         bundle.putString("imageUrl", imageUri);
 
-                                        Responsavel responsavel = new Responsavel(nome, email, senha, cpfValue, cepValue, telefoneValue, dataNascimentoValue, imageUri);
+                                        Responsavel responsavel = new Responsavel(nome, email, senha, cpfValue, cepValue, Integer.parseInt(telefoneValue), dataNascimentoValue, imageUri);
                                         // Criando um objeto da classe Database e chamando o método de inserção
                                         Database db = new Database();
                                         db.inserirResponsavel(responsavel);
@@ -141,7 +141,7 @@ public class SignInResponsibleContinued extends AppCompatActivity {
 
                                 //chamar api
 
-                                Responsavel responsavel = new Responsavel(nome, email, senha, cpfValue, cepValue, telefoneValue, dataNascimentoValue, imageUri);
+                                Responsavel responsavel = new Responsavel(nome, email, senha, cpfValue, cepValue, Integer.parseInt(telefoneValue), dataNascimentoValue, imageUri);
 
                                 chamarApi(responsavel);
                                 // Criando um objeto da classe Database e chamando o método de inserção
@@ -399,7 +399,7 @@ public class SignInResponsibleContinued extends AppCompatActivity {
 
     private void chamarApi(Responsavel responsavel){
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-        Call<Responsavel> call = apiService.createResponsavel(responsavel);
+        Call<Responsavel> call = apiService.cadastrarResponsavel(responsavel);
 
         call.enqueue(new Callback<Responsavel>() {
             @Override
