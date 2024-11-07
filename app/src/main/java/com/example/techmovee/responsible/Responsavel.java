@@ -1,25 +1,30 @@
 package com.example.techmovee.responsible;
 
+import com.google.gson.annotations.SerializedName;
+
+
 public class Responsavel {
+
 
     private String nome;
     private String email;
     private String senha;
-    //    private String cnh;
     private String cpf;
     private String cep;
-    private String telefone;
+    private Integer telefone_id;
+
+    @SerializedName("dt_nascimento")
     private String dataNascimento;
     private String imageUrl;
 
 
-    public Responsavel(String nome, String email, String senha, String cpf, String cep, String telefone ,String dataNascimento, String imageUrl){
+    public Responsavel(String nome, String email, String senha, String cpf, String cep, Integer telefone_id ,String dataNascimento, String imageUrl){
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
         this.cep = cep;
-        this.telefone = telefone;
+        this.telefone_id = telefone_id;
         this.dataNascimento = dataNascimento;
         this.imageUrl = imageUrl;
     }
@@ -68,12 +73,12 @@ public class Responsavel {
         this.cep = cep;
     }
 
-    public String getTelefone(){
-        return telefone;
+    public Integer getTelefone_id(){
+        return telefone_id;
     }
 
-    public void setTelefone(String telefone){
-        this.telefone = telefone;
+    public void setTelefone_id(Integer telefone){
+        this.telefone_id = telefone;
     }
 
     public String getDataNascimento(){

@@ -1,4 +1,4 @@
-package com.example.techmovee.pages.EditarPerfil;
+package com.example.techmovee.pages.Perfil;
 
 import android.os.Bundle;
 

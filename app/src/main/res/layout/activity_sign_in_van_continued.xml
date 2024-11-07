@@ -34,8 +34,8 @@
 
     <ImageView
         android:id="@+id/imageView12"
-        android:layout_width="0dp"
-        android:layout_height="450dp"
+        android:layout_width="739dp"
+        android:layout_height="357dp"
         android:layout_marginStart="27dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="27dp"
@@ -52,8 +52,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="112dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddProfilePicture"
-        app:layout_constraintHorizontal_bias="0.073"
+        android:layout_marginEnd="3dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/btngoback" />
@@ -69,47 +69,19 @@
         app:srcCompat="@drawable/group_254" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout9"
-        style="@style/form"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="54dp"
-        android:hint="CNH"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView12"
-        app:startIconDrawable="@drawable/baseline_featured_play_list_24">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:cursorVisible="true"
-            android:inputType="number"
-            android:paddingStart="40dp"
-            android:textColor="#000000"
-            android:textColorHint="#000000"
-            android:textCursorDrawable="@null" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout13"
         style="@style/form"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="54dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="54dp"
         android:hint="Mensalidade"
         app:boxCornerRadiusBottomStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout9"
+        app:layout_constraintTop_toTopOf="@+id/imageView12"
         app:startIconDrawable="@drawable/baseline_attach_money_24">
 
         <com.google.android.material.textfield.TextInputEditText

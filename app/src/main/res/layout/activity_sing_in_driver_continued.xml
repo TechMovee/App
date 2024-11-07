@@ -11,7 +11,7 @@
 
     <ImageView
         android:id="@+id/imageView16"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
         android:layout_marginStart="54dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="54dp"
-        android:hint="CEP:  12345-123"
+        android:hint="CNH: 12345678901"
         app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,12 +74,12 @@
         app:startIconDrawable="@drawable/baseline_place_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cep"
+            android:id="@+id/cnh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:cursorVisible="true"
             android:inputType="number"
-            android:maxLength="9"
+            android:maxLength="11"
             android:paddingStart="40dp"
             android:textColor="#000000"
             android:textColorHint="#000000"
@@ -184,12 +184,13 @@
 
     <ImageView
         android:id="@+id/imageView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView20"
         app:srcCompat="@drawable/vanescola" />
 
     <TextView

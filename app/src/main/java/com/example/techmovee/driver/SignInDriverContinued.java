@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,29 +17,40 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.techmovee.ApiService;
+import com.example.techmovee.RetrofitClient;
 import com.example.techmovee.SignInDriver;
 import com.example.techmovee.firebase.Database;
 import com.example.techmovee.R;
+import com.example.techmovee.models.Foto;
+import com.example.techmovee.models.Telefone;
 import com.example.techmovee.van.SignInVan;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.UUID;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class SignInDriverContinued extends AppCompatActivity {
 
     private ImageView btnGoBack;
-    private EditText cep;
+    private EditText cnh;
     private EditText telefone;
     private EditText cpf;
     private EditText dataNascimento;
     private Calendar calendar;
     private TextView ageValidationMessage;
+    private ApiService apiService;
+
 
     private Button btnNext;
 
@@ -47,7 +59,7 @@ public class SignInDriverContinued extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_in_driver_continued);
 
-        cep = findViewById(R.id.cep);
+        cnh = findViewById(R.id.cnh);
         telefone = findViewById(R.id.telefone);
         cpf = findViewById(R.id.cpf);
         dataNascimento = findViewById(R.id.date);
@@ -59,97 +71,217 @@ public class SignInDriverContinued extends AppCompatActivity {
 
         // Se existir um estado salvo, restaura os valores
         if (savedInstanceState != null) {
-            cep.setText(savedInstanceState.getString("cep"));
+            cnh.setText(savedInstanceState.getString("cnh"));
             telefone.setText(savedInstanceState.getString("telefone"));
             cpf.setText(savedInstanceState.getString("cpf"));
             dataNascimento.setText(savedInstanceState.getString("dataNascimento"));
         }
 
-        btnNext.setOnClickListener(v -> {
-            // Recebe o Bundle da tela anterior
-            Bundle bundle = getIntent().getExtras();
-            String nome = bundle.getString("nome");
-            String email = bundle.getString("email");
-            String senha = bundle.getString("senha");
-            String imageUri = bundle.getString("imageUrl");
+        // Recupera os dados da tela anterior
+        Bundle bundle = getIntent().getExtras();
+        String nome = bundle.getString("nome");
+        String email = bundle.getString("email");
+        String senha = bundle.getString("senha");
+        String imageUri = bundle.getString("imageUrl");
 
-            String cepValue = cep.getText().toString();
+
+        apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        btnNext.setOnClickListener(v -> {
             String telefoneValue = telefone.getText().toString();
+            String cnhValue = cnh.getText().toString();
             String cpfValue = cpf.getText().toString();
             String dataNascimentoValue = dataNascimento.getText().toString();
 
-            // Validação para garantir que todos os campos estejam preenchidos
-            if (cepValue.isEmpty() || telefoneValue.isEmpty() || cpfValue.isEmpty() || dataNascimentoValue.isEmpty()) {
-                Toast.makeText(SignInDriverContinued.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
-                return; // Interrompe a execução se algum campo estiver vazio
+            // Valida os campos
+            if (telefoneValue.isEmpty() || cnhValue.isEmpty() || cpfValue.isEmpty() || dataNascimentoValue.isEmpty()) {
+                Toast.makeText(SignInDriverContinued.this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+                return;
             }
 
+            // Passo 1: Criar o objeto Telefone sem o ID, já que ele será gerado pelo banco
+            Telefone telefoneObj = new Telefone(null, telefoneValue, "Transportador");  // "mobile" ou o tipo correto esperado pela API
 
-            FirebaseAuth auth = FirebaseAuth.getInstance();
-            auth.createUserWithEmailAndPassword(email, senha)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            if (imageUri != null) {
-                                String fileName = UUID.randomUUID().toString();
-                                StorageReference storageReference = FirebaseStorage.getInstance().getReference("gs//techmovee-4a854.appspot.com/" + fileName);
+// Passo 2: Chamar o endpoint da API para cadastrar o telefone
+            apiService.cadastrarTelefone(telefoneObj).enqueue(new Callback<Telefone>() {
+                @Override
+                public void onResponse(Call<Telefone> call, Response<Telefone> response) {
+                    Log.d("Resposta API", "Corpo da resposta: " + response.body().toString());
 
-                                storageReference.putFile(Uri.parse(imageUri)).addOnSuccessListener(taskSnapshot -> {
-                                    storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                                        String imageUrl = uri.toString();
+                    if (response.isSuccessful()) {
+                        Log.d("Resposta API", "Corpo da resposta: " + response.body().toString());
 
-                                        bundle.putString("nome", nome);
-                                        bundle.putString("cpf", cpfValue);
-                                        bundle.putString("email", email);
-                                        bundle.putString("senha", senha);
-                                        bundle.putString("dataNascimento", dataNascimentoValue);
-                                        bundle.putString("cep", cepValue);
-                                        bundle.putString("telefone", telefoneValue);
-                                        bundle.putString("imageUrl", imageUri);
-
-                                        Motorista motorista = new Motorista(nome, email, senha, cpfValue, cepValue, telefoneValue, dataNascimentoValue, imageUri);
-
-                                        // Criando um objeto da classe Database e chamando o método de inserção
-                                        Database db = new Database();
-                                        db.inserirMotorista(motorista);
-
+                        // Se o telefone for cadastrado com sucesso, obtemos o ID gerado automaticamente
+                        Telefone telefoneCadastrado = response.body();
+                        int telefoneId = telefoneCadastrado.getId();  // O ID será atribuído automaticamente pelo backend
+                        Log.d("ID do Telefone", "ID do Telefone: " + telefoneId);
+                        // Passo 3: Cadastrar a foto
+                        if(imageUri == null){
+                            // Passo 4: Cadastrar o motorista com os IDs de telefone e foto
+                            Motorista motorista = new Motorista(
+                                    nome, email, senha, cpfValue, cnhValue, telefoneId,
+                                    dataNascimentoValue, null
+                            );
+                            Log.d("Motorista", new Gson().toJson(motorista.getImageUrl()));
+                            apiService.cadastrarMotorista(motorista).enqueue(new Callback<Motorista>() {
+                                @Override
+                                public void onResponse(Call<Motorista> call, Response<Motorista> response) {
+                                    if (response.isSuccessful()) {
                                         Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-                                    });
-                                }).addOnFailureListener(e -> {
-                                    Toast.makeText(SignInDriverContinued.this, "Erro ao fazer upload da imagem.", Toast.LENGTH_SHORT).show();
-                                });
-                            } else {
-                                // Caso a imagem não seja obrigatória, apenas passe os dados
+                                    } else {
+                                        Toast.makeText(SignInDriverContinued.this, "Erro ao cadastrar motorista", Toast.LENGTH_SHORT).show();
+                                        Log.d("Erro ao cadastrar motorista", response.toString());
+                                    }
+                                }
 
-                                bundle.putString("nome", nome);
-                                bundle.putString("cpf", cpfValue);
-                                bundle.putString("email", email);
-                                bundle.putString("senha", senha);
-                                bundle.putString("dataNascimento", dataNascimentoValue);
-                                bundle.putString("cep", cepValue);
-                                bundle.putString("telefone", telefoneValue);
-                                bundle.putString("imageUrl", imageUri);
+                                @Override
+                                public void onFailure(Call<Motorista> call, Throwable t) {
+                                    Toast.makeText(SignInDriverContinued.this, "Falha na comunicação com a API", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else{
+                            Foto fotoObj = new Foto(0, imageUri);  // ID será gerado automaticamente pelo backend
+                            apiService.cadastrarFoto(fotoObj).enqueue(new Callback<Foto>() {
+                                @Override
+                                public void onResponse(Call<Foto> call, Response<Foto> response) {
 
-                                Motorista motorista = new Motorista(nome, email, senha, cpfValue, cepValue, telefoneValue, dataNascimentoValue, imageUri);
+                                    if (response.isSuccessful()) {
+                                        Foto fotoCadastrada = response.body();
+                                        int fotoId = fotoCadastrada.getId();  // O ID da foto
 
-                                // Criando um objeto da classe Database e chamando o método de inserção
-                                Database db = new Database();
-                                db.inserirMotorista(motorista);
+                                        // Passo 4: Cadastrar o motorista com os IDs de telefone e foto
+                                        Motorista motorista = new Motorista(
+                                                nome, email, senha, cpfValue, cnhValue, telefoneId,
+                                                dataNascimentoValue, fotoId
+                                        );
+                                        apiService.cadastrarMotorista(motorista).enqueue(new Callback<Motorista>() {
+                                            @Override
+                                            public void onResponse(Call<Motorista> call, Response<Motorista> response) {
+                                                if (response.isSuccessful()) {
+                                                    Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(SignInDriverContinued.this, "Erro ao cadastrar motorista", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
 
-                                Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                                Toast.makeText(SignInDriverContinued.this, "Este email já está cadastrado.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(SignInDriverContinued.this, "Erro ao cadastrar: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
+                                            @Override
+                                            public void onFailure(Call<Motorista> call, Throwable t) {
+                                                Toast.makeText(SignInDriverContinued.this, "Falha na comunicação com a API", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else {
+                                        Toast.makeText(SignInDriverContinued.this, "Erro ao cadastrar foto", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Foto> call, Throwable t) {
+                                    Toast.makeText(SignInDriverContinued.this, "Falha na comunicação com a API de fotos", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
-                    });
-            Intent intent = new Intent(SignInDriverContinued.this, SignInVan.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+
+
+                    } else {
+                        Toast.makeText(SignInDriverContinued.this, "Erro ao cadastrar telefone", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Telefone> call, Throwable t) {
+                    Toast.makeText(SignInDriverContinued.this, "Falha na comunicação com a API de telefones"+t.toString(), Toast.LENGTH_SHORT).show();
+                    Log.d("Falha na comunicação com a API de telefones", t.toString());
+
+                }
+            });
+
         });
+
+
+//        btnNext.setOnClickListener(v -> {
+//            // Recebe o Bundle da tela anterior
+//            Bundle bundle2 = getIntent().getExtras();
+//            String nome2 = bundle2.getString("nome");
+//            String email2 = bundle2.getString("email");
+//            String senha2 = bundle2.getString("senha");
+//            String imageUri2 = bundle2.getString("imageUrl");
+//
+//            String cnhValue = cnh.getText().toString();
+//            String telefoneValue = telefone.getText().toString();
+//            String cpfValue = cpf.getText().toString();
+//            String dataNascimentoValue = dataNascimento.getText().toString();
+//
+//            // Validação para garantir que todos os campos estejam preenchidos
+//            if (cnhValue.isEmpty() || telefoneValue.isEmpty() || cpfValue.isEmpty() || dataNascimentoValue.isEmpty()) {
+//                Toast.makeText(SignInDriverContinued.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
+//                return; // Interrompe a execução se algum campo estiver vazio
+//            }
+//
+//            FirebaseAuth auth = FirebaseAuth.getInstance();
+//            auth.createUserWithEmailAndPassword(email2, senha2)
+//                    .addOnCompleteListener(task -> {
+//                        if (task.isSuccessful()) {
+//                            if (imageUri2 != null) {
+//                                String fileName = UUID.randomUUID().toString();
+//                                StorageReference storageReference = FirebaseStorage.getInstance().getReference("gs//techmovee-4a854.appspot.com/" + fileName);
+//
+//                                storageReference.putFile(Uri.parse(imageUri2)).addOnSuccessListener(taskSnapshot -> {
+//                                    storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+//                                        String imageUrl = uri.toString();
+//
+//                                        bundle.putString("nome", nome);
+//                                        bundle.putString("cpf", cpfValue);
+//                                        bundle.putString("email", email);
+//                                        bundle.putString("senha", senha);
+//                                        bundle.putString("dataNascimento", dataNascimentoValue);
+//                                        bundle.putString("cnh", cnhValue);
+//                                        bundle.putString("telefone", telefoneValue);
+//                                        bundle.putString("imageUrl", imageUri);
+//
+//                                        Motorista motorista = new Motorista(nome, email, senha, cpfValue, cnhValue, Integer.parseInt(telefoneValue), dataNascimentoValue, Integer.parseInt(imageUri));
+//
+//                                        // Criando um objeto da classe Database e chamando o método de inserção
+//                                        Database db = new Database();
+//                                        db.inserirMotorista(motorista);
+//
+//                                        Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+//                                    });
+//                                }).addOnFailureListener(e -> {
+//                                    Toast.makeText(SignInDriverContinued.this, "Erro ao fazer upload da imagem.", Toast.LENGTH_SHORT).show();
+//                                });
+//                            } else {
+//                                // Caso a imagem não seja obrigatória, apenas passe os dados
+//
+//                                bundle.putString("nome", nome);
+//                                bundle.putString("cpf", cpfValue);
+//                                bundle.putString("email", email);
+//                                bundle.putString("senha", senha);
+//                                bundle.putString("dataNascimento", dataNascimentoValue);
+//                                bundle.putString("cnh", cnhValue);
+//                                bundle.putString("telefone", telefoneValue);
+//                                bundle.putString("imageUrl", imageUri);
+//
+//                                Motorista motorista = new Motorista(nome, email, senha, cpfValue, cnhValue, Integer.parseInt(telefoneValue), dataNascimentoValue, Integer.parseInt(imageUri));
+//
+//                                // Criando um objeto da classe Database e chamando o método de inserção
+//                                Database db = new Database();
+//                                db.inserirMotorista(motorista);
+//
+//                                Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+//                            }
+//                        } else {
+//                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+//                                Toast.makeText(SignInDriverContinued.this, "Este email já está cadastrado.", Toast.LENGTH_SHORT).show();
+//                            } else {
+//                                Toast.makeText(SignInDriverContinued.this, "Erro ao cadastrar: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    });
+//            Intent intent = new Intent(SignInDriverContinued.this, SignInVan.class);
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//            Toast.makeText(SignInDriverContinued.this, "Motorista cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+//        });
 
 
         dataNascimento.setOnClickListener(v -> {
@@ -274,7 +406,7 @@ public class SignInDriverContinued extends AppCompatActivity {
         });
 
         // Validação do CEP
-        cep.addTextChangedListener(new TextWatcher() {
+        cnh.addTextChangedListener(new TextWatcher() {
             private boolean isUpdating = false;
 
             @Override
@@ -285,25 +417,22 @@ public class SignInDriverContinued extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (isUpdating) return;
 
-                String cepInput = s.toString().replaceAll("[^0-9]", ""); // Remove qualquer caractere que não seja número
+                String cnhInput = s.toString().replaceAll("[^0-9]", ""); // Remove qualquer caractere que não seja número
 
-                if (cepInput.length() > 5) {
-                    cepInput = cepInput.substring(0, 5) + "-" + cepInput.substring(5);
-                }
 
                 isUpdating = true;
-                cep.setText(cepInput);
-                cep.setSelection(cepInput.length());
+                cnh.setText(cnhInput);
+                cnh.setSelection(cnhInput.length());
                 isUpdating = false;
 
                 // Verifica a validade do CEP apenas quando tiver 8 dígitos (sem contar o hífen)
-                if (cepInput.replace("-", "").length() > 8) {
-                    cep.setError("CEP deve conter apenas 8 dígitos!");
-                } else if (cepInput.replace("-", "").length() == 8) {
+                if (cnhInput.length() > 11) {
+                    cnh.setError("CHN deve conter apenas 11 dígitos!");
+                } else if (cnhInput.length() == 11) {
                     // Aqui você pode adicionar uma chamada para o método de validação se desejar
-                    cep.setError(null);
+                    cnh.setError(null);
                 } else {
-                    cep.setError("CEP deve conter 8 dígitos!");
+                    cnh.setError("CNH deve conter 11 dígitos!");
                 }
             }
 
@@ -331,7 +460,7 @@ public class SignInDriverContinued extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("cep", cep.getText().toString());
+        outState.putString("cnh", cnh.getText().toString());
         outState.putString("telefone", telefone.getText().toString());
         outState.putString("cpf", cpf.getText().toString());
         outState.putString("dataNascimento", dataNascimento.getText().toString());
@@ -340,7 +469,7 @@ public class SignInDriverContinued extends AppCompatActivity {
     @Override
     public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        cep.setText(savedInstanceState.getString("cep"));
+        cnh.setText(savedInstanceState.getString("cnh"));
         telefone.setText(savedInstanceState.getString("telefone"));
         cpf.setText(savedInstanceState.getString("cpf"));
         dataNascimento.setText(savedInstanceState.getString("dataNascimento"));

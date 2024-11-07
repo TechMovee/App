@@ -37,8 +37,7 @@ public class SignInSonContinued extends AppCompatActivity {
 
 
 
-        per1 = findViewById(R.id.das);
-        per2 = findViewById(R.id.as);
+
         serie = findViewById(R.id.serie);
         deficiente = findViewById(R.id.deficiente);
         finalizar = findViewById(R.id.finalizar);
@@ -87,8 +86,6 @@ public class SignInSonContinued extends AppCompatActivity {
             FilhoUtil.serie = serieValue;
             FilhoUtil.deficiente = deficienteValue;
             FilhoUtil.imageUrl = imageUrl;
-            FilhoUtil.periodoInicial = per1Value;
-            FilhoUtil.periodoFinal = per2Value;
             FilhoUtil.escola = escolaValue;
 
             Intent intent = new Intent(SignInSonContinued.this, MainActivity2.class);
@@ -110,10 +107,7 @@ public class SignInSonContinued extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
-        // Adicionando TextWatcher para a validação e formatação do horário de início
-        per1.addTextChangedListener(createTimeTextWatcher(per1));
-        // Adicionando TextWatcher para a validação e formatação do horário de término
-        per2.addTextChangedListener(createTimeTextWatcher(per2));
+
 
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -135,18 +129,7 @@ public class SignInSonContinued extends AppCompatActivity {
         Toast.makeText(this, "Série e Turma válidos!", Toast.LENGTH_SHORT).show();
     }
 
-    private void validatePeriodos() {
-        String periodo1 = per1.getText().toString().trim();
-        String periodo2 = per2.getText().toString().trim();
 
-        if (!isValidHora(periodo1)) {
-            per1.setError("Formato inválido!");
-        } else if (!isValidHora(periodo2)) {
-            per2.setError("Formato inválido!");
-        } else {
-            Toast.makeText(this, "Períodos válidos!", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private boolean isValidHora(String hora) {
         // Verifica se a string está no formato "HH:mm"
@@ -178,7 +161,6 @@ public class SignInSonContinued extends AppCompatActivity {
 
                 editText.setText(formatted.toString());
                 editText.setSelection(formatted.length()); // Move o cursor para o final do texto
-                validatePeriodos();
 
                 isUpdating = false; // Permite futuras atualizações
             }

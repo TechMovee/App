@@ -46,4 +46,11 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+    <string name="filtro_name">Seu App</string>
+    <string-array name="opcoes_filtro">
+        <item>Mensalidade</item>
+        <item>Capacidade</item>
+        <item>Suporte PCD</item>
+    </string-array>
 </resources>

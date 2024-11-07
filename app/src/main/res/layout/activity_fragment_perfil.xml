@@ -1,221 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/background2"
-        android:layout_width="0dp"
-        android:layout_height="95dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/retangulo_laranja" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/background2"
-        app:srcCompat="@drawable/perfil" />
-
-    <TextView
-        android:id="@+id/nomeGrande"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:paddingHorizontal="10dp"
-        android:text="TextView"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/editarPerfil"
-        android:layout_width="135dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:backgroundTint="@android:color/transparent"
-        android:text="Editar perfil"
-        android:textColor="#F8B643"
-        app:layout_constraintEnd_toStartOf="@+id/sair"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomeGrande"
-        app:strokeColor="#F8B643"
-        app:strokeWidth="1dp" />
+        <ImageView
+            android:id="@+id/background2"
+            android:layout_width="0dp"
+            android:layout_height="95dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/retangulo_laranja" />
 
-    <Button
-        android:id="@+id/sair"
-        android:layout_width="135dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:backgroundTint="#FCF5FD"
-        android:backgroundTintMode="add"
-        android:text="Sair da conta"
-        android:textColor="#F8B643"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editarPerfil"
-        app:layout_constraintTop_toBottomOf="@+id/nomeGrande"
-        app:strokeColor="#F8B643"
-        app:strokeWidth="1dp" />
+        <ImageView
+            android:id="@+id/fotoPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="46dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/background2"
+            app:srcCompat="@drawable/perfil" />
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/sair"
-        app:layout_constraintStart_toEndOf="@+id/sair"
-        app:layout_constraintTop_toTopOf="@+id/sair"
-        app:layout_constraintVertical_bias="0.533"
-        app:srcCompat="@drawable/vector__1_" />
+        <TextView
+            android:id="@+id/nomeGrande"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="TextView"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fotoPerfil" />
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="54dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editarPerfil"
-        app:srcCompat="@drawable/caixaperfil" />
+        <Button
+            android:id="@+id/editarPerfil"
+            android:layout_width="135dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@android:color/transparent"
+            android:text="Editar perfil"
+            android:textColor="#F8B643"
+            app:layout_constraintEnd_toStartOf="@+id/sair"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nomeGrande"
+            app:strokeColor="#F8B643"
+            app:strokeWidth="1dp" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="16dp"
-        android:text="Informações pessoais"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+        <Button
+            android:id="@+id/sair"
+            android:layout_width="135dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#FCF5FD"
+            android:backgroundTintMode="add"
+            android:text="Sair da conta"
+            android:textColor="#F8B643"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/editarPerfil"
+            app:layout_constraintTop_toBottomOf="@+id/nomeGrande"
+            app:strokeColor="#F8B643"
+            app:strokeWidth="1dp" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Nome completo"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sair"
+            app:layout_constraintStart_toEndOf="@+id/sair"
+            app:layout_constraintTop_toTopOf="@+id/sair"
+            app:layout_constraintVertical_bias="0.533"
+            app:srcCompat="@drawable/vector__1_" />
 
-    <TextView
-        android:id="@+id/nome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="54dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editarPerfil"
+            app:srcCompat="@drawable/caixaperfil" />
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Idade"
-        app:layout_constraintStart_toStartOf="@+id/nome"
-        app:layout_constraintTop_toBottomOf="@+id/nome" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="16dp"
+            android:text="Informações pessoais"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView10" />
 
-    <TextView
-        android:id="@+id/idade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Nome completo"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="Telefone"
-        app:layout_constraintBottom_toBottomOf="@+id/textView13"
-        app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toTopOf="@+id/textView13" />
+        <TextView
+            android:id="@+id/nome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView10"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-    <TextView
-        android:id="@+id/telefone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Idade"
+            app:layout_constraintStart_toStartOf="@+id/nome"
+            app:layout_constraintTop_toBottomOf="@+id/nome" />
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:text="Filhos"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="@+id/textView15" />
+        <TextView
+            android:id="@+id/idade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-    <TextView
-        android:id="@+id/filhos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="Telefone"
+            app:layout_constraintBottom_toBottomOf="@+id/textView13"
+            app:layout_constraintStart_toEndOf="@+id/textView13"
+            app:layout_constraintTop_toTopOf="@+id/textView13" />
 
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Email"
-        app:layout_constraintStart_toStartOf="@+id/idade"
-        app:layout_constraintTop_toBottomOf="@+id/idade" />
+        <TextView
+            android:id="@+id/telefone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/textView15"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:text="Filhos"
+            app:layout_constraintBottom_toBottomOf="@+id/textView15"
+            app:layout_constraintStart_toEndOf="@+id/textView15"
+            app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/filhos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/textView17"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Email"
+            app:layout_constraintStart_toStartOf="@+id/idade"
+            app:layout_constraintTop_toBottomOf="@+id/idade" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/textView19"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="54dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10"
-        tools:listitem="@layout/son_info_card" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginEnd="34dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView10"
+            tools:listitem="@layout/son_info_card" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/addFilho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView10"
+            app:srcCompat="@drawable/addfilho__1_" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
